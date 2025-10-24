@@ -1,22 +1,47 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Main {
-/** punto di inizio dell'applicazione
- * thread padre*/
-public static void main(String[]arg){
-    Cavallo fulmine = new Cavallo( "Fulmine",56);
-    Cavallo lampo=new Cavallo ("Lampo",78);
-    Cavallo rose = new Cavallo("Rose",5);
-    Cavallo margherita = new Cavallo("Margherita",999);
-    Cavallo rambo = new Cavallo("Rambo",9);
+    static String primo="";
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        String tmpS;
+        int tmp;
+        ArrayList<Cavallo> listaCavallo = new ArrayList<Cavallo>();
+        for (int i = 1; i <= 4; i++) {
+            System.out.println("Inserisci il nome del cavallo " + i);
+            tmpS =  input.nextLine();
+            System.out.println("Inserisci la lentezza del cavallo " + i);
+            tmp = input.nextInt();
+            String v = input.nextLine(); //prende il \n
+            Cavallo c=new Cavallo(tmpS, tmp);
+            listaCavallo.add(c);
+        }
+       
+        for(Cavallo c: listaCavallo){
+            c.start();
+        }
+        int n = (int) (Math.random() * (listaCavallo.size() +1));
+        Cavallo x = listaCavallo.get(n);
+        x.interrupt();
+        System.out.println("Il cavallo interrotto è: " + x.getName());
+       
+        for(Cavallo c: listaCavallo){
+            try {
+                c.join();
+            } catch (InterruptedException e) {
+                interrotto = true;
+                System.out.println(name + " è stato interrotto!");
+                return;
+            }
+        }
+        System.out.println("Il primo cavallo: " + primo);    }
 
-//    rambo.setPriority(Thread.MAX_PRIORITY);
-//    margherita.setPriority(Thread.MIN_PRIORITY);
-
-    fulmine.start();
-    rambo.start();
-    rose.start();
-    margherita.start();
-    rambo.start();
-
-
-}
+    public static String getPrimo() {
+        return primo;
+    }
+    public static void setPrimo(String primo) {
+        Main.primo = primo;
+    }
 }
