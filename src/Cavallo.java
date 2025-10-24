@@ -1,5 +1,5 @@
 /*questa classe è il nostro primo thread e consentirà la simulazione di un cavallo in corsa parallelamente con altri della stessa specie
- * @author brugiati
+ * @author mincigrucci
  * @version 1.0
  * */
 public class Cavallo extends Thread{
